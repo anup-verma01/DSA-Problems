@@ -1,0 +1,19 @@
+class Solution {
+    public int maxProduct(int[] arr) {
+        int n=arr.length;
+        int maxpod=Integer.MIN_VALUE , pod = 1;
+        for(int i=0 ;i<n;i++){
+            pod*= arr[i];
+            if(pod>maxpod)maxpod=pod;
+            if(pod==0)pod=1;
+        }
+        pod=1;
+         for(int i=n-1 ;i>=0 ;i--){
+            pod*= arr[i];
+            if(pod>maxpod)maxpod=pod;
+            if(pod==0)pod=1;
+        }
+        return maxpod;
+
+    }
+}
