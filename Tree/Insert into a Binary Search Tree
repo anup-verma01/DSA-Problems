@@ -13,6 +13,19 @@
  *     }
  * }
  */
+
+// first method to solve using recursion
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root==null) return new TreeNode(val);
+        if(val<root.val) root.left = insertIntoBST(root.left,val);
+        else root.right = insertIntoBST(root.right,val);
+        return root;
+        
+    }
+}
+
+// second method
 class Solution {
     public void insert(TreeNode root, int val) {
         if(val<root.val){
