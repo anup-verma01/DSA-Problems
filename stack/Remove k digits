@@ -1,0 +1,35 @@
+class Solution {
+    public String removeKdigits(String num, int k) {
+
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < num.length(); i++) {
+            char current = num.charAt(i);
+
+            // remove previous bigger digits
+            while (k > 0 && result.length() > 0 
+                   && result.charAt(result.length() - 1) > current) {
+                result.deleteCharAt(result.length() - 1);
+                k--;
+            }
+
+            result.append(current);
+        }
+
+        // if k is still left, remove from end
+        while (k > 0 && result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
+            k--;
+        }
+
+        // remove leading zeros
+        int index = 0;
+        while (index < result.length() && result.charAt(index) == '0') {
+            index++;
+        }
+
+        String ans = result.substring(index);
+
+        return ans.length() == 0 ? "0" : ans;
+    }
+}
