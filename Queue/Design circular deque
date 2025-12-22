@@ -1,0 +1,57 @@
+class MyCircularDeque {
+    int[] d;
+    int front, rear, size, cap;
+
+    public MyCircularDeque(int k) {
+        cap = k;
+        d = new int[k];
+        front = 0;
+        rear = 0;
+        size = 0;
+    }
+
+    public boolean insertFront(int v) {
+        if (size == cap) return false;
+        front = (front - 1 + cap) % cap;
+        d[front] = v;
+        size++;
+        return true;
+    }
+
+    public boolean insertLast(int v) {
+        if (size == cap) return false;
+        d[rear] = v;
+        rear = (rear + 1) % cap;
+        size++;
+        return true;
+    }
+
+    public boolean deleteFront() {
+        if (size == 0) return false;
+        front = (front + 1) % cap;
+        size--;
+        return true;
+    }
+
+    public boolean deleteLast() {
+        if (size == 0) return false;
+        rear = (rear - 1 + cap) % cap;
+        size--;
+        return true;
+    }
+
+    public int getFront() {
+        return size == 0 ? -1 : d[front];
+    }
+
+    public int getRear() {
+        return size == 0 ? -1 : d[(rear - 1 + cap) % cap];
+    }
+
+    public boolean isEmpty() { 
+         return size == 0;  
+    }
+    public boolean isFull() {
+         return size == cap;
+    }
+}
