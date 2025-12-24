@@ -1,0 +1,63 @@
+class MyHashMap {
+
+    class Pair {
+        int key;
+        int value;
+        Pair(int k, int v) {
+            key = k;
+            value = v;
+        }
+    }
+
+    Queue<Pair>[] buckets;
+    int size = 1000;
+
+    public MyHashMap() {
+        buckets = new LinkedList[size];
+        for (int i = 0; i < size; i++) {
+            buckets[i] = new LinkedList<>();
+        }
+    }
+
+    private int hash(int key) {
+        return key % size;
+    }
+
+    public void put(int key, int value) {
+        int index = hash(key);
+        Queue<Pair> q = buckets[index];
+
+        for (Pair p : q) {
+            if (p.key == key) {
+                p.value = value;
+                return;
+            }
+        }
+        q.add(new Pair(key, value));
+    }
+
+    public int get(int key) {
+        int index = hash(key);
+        Queue<Pair> q = buckets[index];
+
+        for (Pair p : q) {
+            if (p.key == key) {
+                return p.value;
+            }
+        }
+        return -1;
+    }
+
+    public void remove(int key) {
+        int index = hash(key);
+        Queue<Pair> q = buckets[index];
+
+        int n = q.size();
+        for (int i = 0; i < n; i++) {
+            Pair p = q.poll();
+            if (p.key != key) {
+                q.add(p);
+            }
+        }
+    }
+}
